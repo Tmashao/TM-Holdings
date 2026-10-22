@@ -22,7 +22,7 @@ Menu entries currently have `price: null`, so the site displays “Price to be c
 
 The enquiry basket creates a WhatsApp enquiry when the confirmed international-format number is configured. Current number: `+27693790402`. The site does not create an ordering endpoint, accept payments or imply that collection/delivery is available.
 
-The site uses an in-panel tab navigation so visitors can switch between Home, Menu, Enquiry, Story, Brand and Contact without paging through every section. On phones, the header and two-row icon tab bar stay fixed while the page content and footer scroll together in the available area; tab labels use readable text and touch targets are at least 52px tall. On larger screens the tabs remain above the panel. The tabs support keyboard arrow/Home/End navigation and visible keyboard focus. The brand concept gallery stays collapsed until opened.
+The site uses an in-panel tab navigation so visitors can switch between Home, Menu, Enquiry, Story, Brand and Contact without paging through every section. On phones, the header and two-row icon tab bar stay fixed while the page content and footer scroll together in the available area; tab labels use readable text and touch targets are at least 56px tall. On larger screens the tabs remain above the panel. The tabs support keyboard arrow/Home/End navigation and visible keyboard focus. The brand concept gallery stays collapsed until opened.
 
 ## Brand assets
 
