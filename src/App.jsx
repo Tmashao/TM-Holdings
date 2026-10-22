@@ -348,23 +348,26 @@ function App() {
               </p>
             </div>
 
-            <div className="concept-disclaimer">
-              These are concept visualisations, not photographs of completed premises,
-              final packaging, or current staff. Final brand assets and business details
-              are still to be confirmed.
-            </div>
+            <details className="brand-concepts-disclosure">
+              <summary>View the brand concept gallery</summary>
+              <div className="concept-disclaimer">
+                These are concept visualisations, not photographs of completed premises,
+                final packaging, or current staff. Final brand assets and business details
+                are still to be confirmed.
+              </div>
 
-            <div className="brand-concept-grid">
-              {brandConcepts.map((concept) => (
-                <article key={concept.id} className="brand-concept-card">
-                  <img src={concept.image} alt={concept.alt} loading="lazy" />
-                  <div className="brand-concept-caption">
-                    <span>{concept.label}</span>
-                    <h3>{concept.title}</h3>
-                  </div>
-                </article>
-              ))}
-            </div>
+              <div className="brand-concept-grid">
+                {brandConcepts.map((concept) => (
+                  <article key={concept.id} className="brand-concept-card">
+                    <img src={concept.image} alt={concept.alt} loading="lazy" />
+                    <div className="brand-concept-caption">
+                      <span>{concept.label}</span>
+                      <h3>{concept.title}</h3>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </details>
           </div>
         </section>
 
@@ -457,6 +460,10 @@ function App() {
           <span>{business.location} · {business.status}</span>
         </div>
       </footer>
+      <a className="scroll-top" href="#home" aria-label="Back to top">
+        <span aria-hidden="true">↑</span>
+        <span>Top</span>
+      </a>
     </div>
   )
 }

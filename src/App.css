@@ -849,6 +849,28 @@
   margin-top: 1rem;
 }
 
+.brand-concepts-disclosure {
+  border-top: 1px solid rgba(43, 31, 24, 0.16);
+}
+
+.brand-concepts-disclosure > summary {
+  width: fit-content;
+  padding: 0.9rem 0;
+  color: var(--charcoal);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
+  list-style-position: inside;
+}
+
+.brand-concepts-disclosure > summary::marker {
+  color: var(--burnt-orange);
+}
+
+.brand-concepts-disclosure[open] > summary {
+  margin-bottom: 0.5rem;
+}
+
 .concept-disclaimer {
   margin-bottom: 1.1rem;
   padding: 0.9rem 1rem;
@@ -1021,6 +1043,42 @@
   font-size: 0.8rem;
 }
 
+.scroll-top {
+  position: fixed;
+  z-index: 9;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  display: flex;
+  width: 52px;
+  height: 52px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(247, 242, 232, 0.35);
+  border-radius: 50%;
+  background: var(--charcoal);
+  box-shadow: 0 4px 18px rgba(43, 31, 24, 0.24);
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.scroll-top span:first-child {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.scroll-top span:last-child {
+  margin-top: 0.05rem;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.scroll-top:hover {
+  background: var(--burnt-orange);
+}
+
 .footer-bottom {
   margin-top: 1.5rem;
   padding-top: 1rem;
@@ -1148,7 +1206,7 @@
   }
 
   .section-pad {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
 
   .menu-heading,
@@ -1173,7 +1231,7 @@
   }
 
   .menu-card-art {
-    min-height: 150px;
+    min-height: 120px;
   }
 
   .card-body {
@@ -1185,7 +1243,7 @@
   }
 
   .card-body > p {
-    min-height: 6rem;
+    min-height: 0;
     font-size: 0.78rem;
   }
 
@@ -1203,7 +1261,7 @@
   }
 
   .story-art {
-    min-height: 285px;
+    min-height: 220px;
   }
 
   .community-layout {
@@ -1282,5 +1340,12 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 0.45rem;
+  }
+
+  .scroll-top {
+    right: max(0.75rem, env(safe-area-inset-right));
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    width: 46px;
+    height: 46px;
   }
 }
