@@ -40,8 +40,8 @@ function App() {
 
   const selectTab = (tab) => {
     setActiveTab(tab)
-    const main = document.querySelector('main')
-    if (main) main.scrollTop = 0
+    const content = document.querySelector('.content-scroll')
+    if (content) content.scrollTop = 0
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -148,8 +148,9 @@ function App() {
         </div>
       </header>
 
-      <main>
-        <div className="tab-box container">
+      <div className="content-scroll">
+        <main>
+          <div className="tab-box container">
           <nav
             className="main-nav"
             role="tablist"
@@ -547,23 +548,24 @@ function App() {
         </section>
         )}
           </div>
-        </div>
-      </main>
+          </div>
+        </main>
 
-      <footer className="site-footer">
-        <div className="container footer-inner">
-          <button type="button" className="footer-brand" onClick={() => selectTab('home')}>
-            <img src={brandLogo} alt="" />
-            <span><strong>{business.name}</strong><small>{business.restaurantName}</small></span>
-          </button>
-          <p>{business.tagline}</p>
-          <button type="button" className="back-to-top" onClick={() => selectTab('home')}>Home ↑</button>
-        </div>
-        <div className="container footer-bottom">
-          <span>© {business.name}</span>
-          <span>{business.location} · {business.status}</span>
-        </div>
-      </footer>
+        <footer className="site-footer">
+          <div className="container footer-inner">
+            <button type="button" className="footer-brand" onClick={() => selectTab('home')}>
+              <img src={brandLogo} alt="" />
+              <span><strong>{business.name}</strong><small>{business.restaurantName}</small></span>
+            </button>
+            <p>{business.tagline}</p>
+            <button type="button" className="back-to-top" onClick={() => selectTab('home')}>Home ↑</button>
+          </div>
+          <div className="container footer-bottom">
+            <span>© {business.name}</span>
+            <span>{business.location} · {business.status}</span>
+          </div>
+        </footer>
+      </div>
     </div>
   )
 }
