@@ -1223,6 +1223,7 @@
     z-index: 20;
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
+    justify-items: center;
     gap: 0.2rem;
     overflow: visible;
     padding: 0.35rem 0.3rem calc(0.35rem + env(safe-area-inset-bottom));
@@ -1236,8 +1237,9 @@
 
   .tab-button {
     display: flex;
-    min-width: 0;
+    width: 48px;
     height: 48px;
+    min-width: 48px;
     min-height: 48px;
     aspect-ratio: auto;
     flex-direction: row;
