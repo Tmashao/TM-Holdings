@@ -5,15 +5,15 @@ export const business = {
   tagline: 'Good Food. Stronger Community.',
   campaignPhrase: 'Eat. Connect. Grow.',
   status: 'Opening soon',
-  whatsappNumber: '',
+  whatsappNumber: '+27693790402',
   telephoneNumber: '',
   location: 'Mamelodi, Pretoria, South Africa',
-  address: '',
+  address: 'SS Mokoene Drive, Mahube, Pretoria 0122',
   operatingHours: '',
   launchDate: '',
   instagram: '',
   facebook: '',
-  directions: '',
+  directions: 'https://www.google.com/maps/search/?api=1&query=SS%20Mokoene%20Drive%2C%20Mahube%2C%20Pretoria%200122',
 }
 
 export const brandLogo = '/brand/kbz-logo.jpeg'

@@ -374,15 +374,15 @@ function App() {
               <p className="eyebrow">Keep in touch</p>
               <h2>KBZ is coming to {business.location.split(',')[0]}.</h2>
               <p className="section-intro">
-                We’ll share confirmed contact, location and opening information here.
-                Until then, follow along as the idea becomes a reality.
+                Send us a WhatsApp enquiry or find the address we’ve shared. Opening
+                hours and the launch date will be added once confirmed.
               </p>
             </div>
 
             <div className="contact-grid">
               <article className="contact-card">
                 <span className="contact-index">01 / FIND US</span>
-                <h3>Rooted in {business.location.split(',')[0]}.</h3>
+                <h3>Find us in {business.location.split(',')[0]}.</h3>
                 <p>{business.location}</p>
                 {business.address ? (
                   <p className="contact-detail">{business.address}</p>
@@ -394,7 +394,7 @@ function App() {
                 {business.directions && (
                   <p className="contact-detail">
                     <a href={business.directions} target="_blank" rel="noreferrer">
-                      Get directions
+                      Find this address on Google Maps
                     </a>
                   </p>
                 )}
@@ -404,7 +404,7 @@ function App() {
               </article>
               <article className="contact-card">
                 <span className="contact-index">02 / SAY HELLO</span>
-                <h3>Let’s connect soon.</h3>
+                <h3>Talk to KBZ.</h3>
                 {business.telephoneNumber ? (
                   <p><a href={`tel:${business.telephoneNumber}`}>{business.telephoneNumber}</a></p>
                 ) : (

@@ -20,7 +20,7 @@ Edit `src/config.js` to update:
 
 Menu entries currently have `price: null`, so the site displays “Price to be confirmed” and does not show an invented total. Replace each `null` with the owner-approved numeric price after costing is complete. Menu entries are a preview, not a statement of current availability.
 
-The enquiry basket can be used for browsing, but its WhatsApp action stays disabled until `business.whatsappNumber` is set to a confirmed international-format number. The site does not create an ordering endpoint, accept payments or imply that collection/delivery is available.
+The enquiry basket creates a WhatsApp enquiry when the confirmed international-format number is configured. Current number: `+27693790402`. The site does not create an ordering endpoint, accept payments or imply that collection/delivery is available.
 
 ## Brand assets
 
@@ -46,8 +46,6 @@ For a Blueprint deployment, connect the repository to Render and apply the `ko-b
 ## Owner details still needed
 
 - Approved final menu, portion sizes, availability and prices.
-- Confirmed operating address and directions.
-- Official phone and WhatsApp numbers.
 - Opening hours and launch date.
 - Ordering, collection and delivery arrangements.
 - Official social links, real food photography and approved final logo assets.
