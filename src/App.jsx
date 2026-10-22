@@ -173,6 +173,8 @@ function App() {
                 aria-selected={activeTab === tab}
                 aria-controls={`${tab}-panel`}
                 className="tab-button"
+                aria-label={label}
+                title={label}
                 tabIndex={activeTab === tab ? 0 : -1}
                 onClick={() => selectTab(tab)}
               >
@@ -181,7 +183,7 @@ function App() {
                     <path key={path} d={path} />
                   ))}
                 </svg>
-                {label}
+                <span className="tab-label">{label}</span>
               </button>
             ))}
           </nav>
