@@ -221,8 +221,8 @@ function App() {
               <p className="eyebrow">Takeaway enquiries</p>
               <h2>Start a conversation.</h2>
               <p className="section-intro">
-                Add ideas from the preview to your enquiry. We’ll enable WhatsApp
-                enquiries when the official business number is confirmed.
+                Add ideas from the preview to your enquiry. When you’re ready, we’ll
+                open a WhatsApp message to the business number.
               </p>
             </div>
 
@@ -282,8 +282,8 @@ function App() {
                 </button>
                 {!hasWhatsApp && (
                   <p className="setup-note">
-                    WhatsApp will be available here once the official business number
-                    is confirmed. No number or ordering endpoint has been published.
+                    WhatsApp will be available once the official business number is
+                    confirmed. No ordering endpoint has been added.
                   </p>
                 )}
               </aside>
