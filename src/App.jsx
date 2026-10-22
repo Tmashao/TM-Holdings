@@ -370,7 +370,7 @@ function App() {
                 </div>
                 <button
                   type="button"
-                  className="primary-button wide-button"
+                  className="primary-button wide-button whatsapp-button"
                   onClick={openWhatsAppOrder}
                   disabled={!hasWhatsApp || order.length === 0}
                 >
