@@ -1,63 +1,53 @@
-# Ko Bazlwaneng
+# Ko Bazalwaneng / KBZ Springbok Grill
 
-A bright, welcoming food brand website for a township fast-food business selling grilled and fried springbok, potato wedges, French fries, and community-focused meal combos.
-
-## Brand direction
-
-- Business name: Ko Bazlwaneng
-- Tagline: Good Food. Good People. Good Purpose.
-- Supporting line: Township Flavour. Community Spirit.
-- Core identity: faith-inspired, community-led, proud South African, family-friendly
+A responsive, single-page introduction to KBZ Springbok Grill, a takeaway-first springbok grill in development for Mamelodi, Pretoria. The site clearly marks the business as opening soon and treats the menu as a preview until the owner confirms items, portions, availability and prices.
 
 ## Project setup
 
 ```bash
-npm install
-npm run dev -- --host 0.0.0.0
+npm ci
+npm run dev
 ```
 
-## Update the business details
+## Update owner-confirmed details
 
-Edit the main business config in `src/config.js`:
+Edit `src/config.js` to update:
 
-- business name and tagline
-- WhatsApp number
-- telephone number
-- address and location
-- operating hours
-- social links
-- menu items and pricing
+- Restaurant name, brand wording and opening status.
+- WhatsApp number in international format (for example, `+27...`) and telephone number.
+- Confirmed address, directions, hours, launch date and official social links.
+- Menu item names, descriptions and prices.
 
-## Build for production
+Menu entries currently have `price: null`, so the site displays “Price to be confirmed” and does not show an invented total. Replace each `null` with the owner-approved numeric price after costing is complete. Menu entries are a preview, not a statement of current availability.
+
+The enquiry basket can be used for browsing, but its WhatsApp action stays disabled until `business.whatsappNumber` is set to a confirmed international-format number. The site does not create an ordering endpoint, accept payments or imply that collection/delivery is available.
+
+## Brand assets
+
+- `public/brand/kbz-logo.jpeg` is the logo artwork supplied by the owner.
+- `public/logo-mark.svg` and `public/logo-ko-bazlwaneng.svg` are interim vector assets.
+- `public/favicon.svg` is the browser icon.
+
+The storefront, interior, takeaway packaging and uniform images in `public/brand/` are owner-supplied concept visuals. The site labels them as visualisations; they do not represent completed premises, final packaging, or current staff. Replace them with approved final artwork and real photography when available.
+
+## Build
 
 ```bash
+npm run lint
 npm run build
 ```
 
 ## Deploy to Render
 
-This is a static Vite site. The repository includes a `render.yaml` Blueprint that builds the app and publishes `dist`.
+This is a static Vite site. The included `render.yaml` builds the app and publishes `dist`.
 
-### Blueprint deployment
+For a Blueprint deployment, connect the repository to Render and apply the `ko-bazlwaneng` static-site service. Render installs dependencies with `npm ci`, runs `npm run build`, and publishes `./dist`. The Vite config uses a relative asset base for static hosting.
 
-1. Push this project to a GitHub, GitLab, or Bitbucket repository.
-2. In Render, choose **New** > **Blueprint** and connect that repository.
-3. Review the `ko-bazlwaneng` static site and select **Apply**.
+## Owner details still needed
 
-Render will install dependencies with `npm ci`, run `npm run build`, and publish `./dist`. Later pushes to the connected branch will trigger a new deploy.
-
-### Manual static-site setup
-
-If you prefer not to use the Blueprint, create a **Static Site** in Render with:
-
-- Build command: `npm ci && npm run build`
-- Publish directory: `dist`
-- Environment variable: `NODE_VERSION=22.12.0`
-
-The Vite config already uses a relative asset base, which works on Render.
-
-## Notes
-
-- The logo assets are stored in `public/logo-ko-bazlwaneng.svg` and `public/logo-mark.svg`.
-- The ordering flow opens a WhatsApp message when a valid business number is configured.
-- If no WhatsApp number is set, the order panel shows a helpful setup message instead.
+- Approved final menu, portion sizes, availability and prices.
+- Confirmed operating address and directions.
+- Official phone and WhatsApp numbers.
+- Opening hours and launch date.
+- Ordering, collection and delivery arrangements.
+- Official social links, real food photography and approved final logo assets.

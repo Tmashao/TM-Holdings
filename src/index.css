@@ -1,19 +1,20 @@
 :root {
-  --brand-yellow: #ffd447;
-  --brand-orange: #ff8733;
-  --bg-cream: #fff8eb;
-  --brand-green: #4e9b63;
-  --brand-plum: #482c46;
-  --white: #ffffff;
-  --text-soft: rgba(72, 44, 70, 0.8);
-  --shadow-soft: rgba(72, 44, 70, 0.12);
-  --container-width: 1180px;
+  --charcoal: #2b1f18;
+  --brown: #49362a;
+  --gold: #ddb15a;
+  --gold-light: #edca7f;
+  --cream: #f7f2e8;
+  --cream-light: #fcfaf5;
+  --cream-dark: #eee7d9;
+  --burnt-orange: #b95b31;
+  --muted: #6b6259;
+  --container-width: 1200px;
 
   font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: var(--brand-plum);
-  background: var(--bg-cream);
+  color: var(--charcoal);
+  background: var(--cream);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -26,12 +27,14 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
 }
 
 body {
+  min-width: 320px;
   margin: 0;
-  background: var(--bg-cream);
-  color: var(--brand-plum);
+  background: var(--cream);
+  color: var(--charcoal);
 }
 
 img {
@@ -64,7 +67,7 @@ p {
 
 button:focus-visible,
 a:focus-visible {
-  outline: 3px solid rgba(72, 44, 70, 0.45);
+  outline: 3px solid var(--burnt-orange);
   outline-offset: 3px;
 }
 
