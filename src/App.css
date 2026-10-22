@@ -1153,7 +1153,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 820px) {
   body {
     height: 100%;
     overflow: hidden;
@@ -1237,8 +1237,9 @@
   .tab-button {
     display: flex;
     min-width: 0;
+    height: 48px;
     min-height: 48px;
-    aspect-ratio: 1;
+    aspect-ratio: auto;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -1291,7 +1292,7 @@
 
   .hero-copy h1 {
     max-width: 10ch;
-    font-size: clamp(3.5rem, 12vw, 5.5rem);
+    font-size: clamp(3.5rem, 8vw, 5rem);
   }
 
   .hero-text {
