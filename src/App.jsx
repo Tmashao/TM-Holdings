@@ -10,6 +10,22 @@ import {
   storyHighlights,
 } from './config'
 
+const tabIcons = {
+  home: ['M3 10.5 12 3l9 7.5', 'M5.5 9.5v11h13v-11', 'M9.5 20.5v-6h5v6'],
+  menu: ['M4 5h16', 'M4 10h16', 'M4 15h16', 'M4 20h16'],
+  order: ['M5 8h14l1 13H4L5 8Z', 'M9 8V6a3 3 0 0 1 6 0v2'],
+  story: [
+    'M12 6c-2-2-5-2-9-1v14c4-1 7-1 9 1',
+    'M12 6c2-2 5-2 9-1v14c-4-1-7-1-9 1',
+    'M12 6v14',
+  ],
+  brand: ['m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z', 'm19 14 .9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9L19 14Z'],
+  contact: [
+    'M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z',
+    'M12 10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z',
+  ],
+}
+
 const formatPrice = (amount) => {
   if (amount === null || amount === undefined || Number.isNaN(amount)) {
     return 'Price to be confirmed'
@@ -24,6 +40,8 @@ function App() {
 
   const selectTab = (tab) => {
     setActiveTab(tab)
+    const main = document.querySelector('main')
+    if (main) main.scrollTop = 0
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -157,6 +175,11 @@ function App() {
                 tabIndex={activeTab === tab ? 0 : -1}
                 onClick={() => selectTab(tab)}
               >
+                <svg className="tab-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  {tabIcons[tab].map((path) => (
+                    <path key={path} d={path} />
+                  ))}
+                </svg>
                 {label}
               </button>
             ))}
