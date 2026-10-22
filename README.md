@@ -22,7 +22,7 @@ Menu entries currently have `price: null`, so the site displays “Price to be c
 
 The enquiry basket creates a WhatsApp enquiry when the confirmed international-format number is configured. Current number: `+27693790402`. The site does not create an ordering endpoint, accept payments or imply that collection/delivery is available.
 
-On mobile, the brand concept gallery is collapsed by default to shorten the page; use its disclosure control to view the concepts. A persistent “Top” shortcut returns to the beginning without a long manual swipe.
+The site uses an in-panel tab navigation so visitors can switch between Home, Menu, Enquiry, Story, Brand and Contact without paging through every section. The tabs support keyboard arrow/Home/End navigation. The brand concept gallery stays collapsed until opened.
 
 ## Brand assets
 

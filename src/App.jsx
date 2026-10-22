@@ -20,6 +20,37 @@ const formatPrice = (amount) => {
 
 function App() {
   const [order, setOrder] = useState([])
+  const [activeTab, setActiveTab] = useState('home')
+
+  const selectTab = (tab) => {
+    setActiveTab(tab)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleTabKeyDown = (event) => {
+    const tabButtons = Array.from(
+      event.currentTarget.querySelectorAll('[role="tab"]'),
+    )
+    const currentIndex = tabButtons.indexOf(event.target)
+    let nextIndex = currentIndex
+
+    if (event.key === 'ArrowRight') {
+      nextIndex = (currentIndex + 1) % tabButtons.length
+    } else if (event.key === 'ArrowLeft') {
+      nextIndex = (currentIndex - 1 + tabButtons.length) % tabButtons.length
+    } else if (event.key === 'Home') {
+      nextIndex = 0
+    } else if (event.key === 'End') {
+      nextIndex = tabButtons.length - 1
+    } else {
+      return
+    }
+
+    event.preventDefault()
+    const nextTab = tabButtons[nextIndex]
+    nextTab.focus()
+    selectTab(nextTab.id.replace('tab-', ''))
+  }
 
   const addToOrder = (item) => {
     setOrder((current) => {
@@ -84,29 +115,61 @@ function App() {
     <div className="page-shell">
       <header className="topbar">
         <div className="nav-wrap container">
-          <a href="#home" className="brand" aria-label={`${business.name} home`}>
+          <button type="button" className="brand" aria-label={`${business.name} home`} onClick={() => selectTab('home')}>
             <img src={brandLogo} alt="" className="brand-mark" />
             <span className="brand-name">
               <strong>{business.name}</strong>
               <small>{business.restaurantName}</small>
             </span>
-          </a>
+          </button>
 
-          <nav className="main-nav" aria-label="Main navigation">
-            <a href="#menu">Menu</a>
-            <a href="#story">Our Story</a>
-            <a href="#community">Community</a>
-            <a href="#brand">Brand</a>
-            <a href="#contact">Contact</a>
-          </nav>
-
-          <a href="#order" className="primary-button nav-cta">
-            Enquire
-          </a>
+          <a href="#contact" className="header-location" onClick={(event) => {
+            event.preventDefault()
+            selectTab('contact')
+          }}>{business.location}</a>
         </div>
       </header>
 
-      <main id="home">
+      <main>
+        <div className="tab-box container">
+          <nav
+            className="main-nav"
+            role="tablist"
+            aria-label="Website sections"
+            onKeyDown={handleTabKeyDown}
+          >
+            {[
+              ['home', 'Home'],
+              ['menu', 'Menu'],
+              ['order', `Enquiry${order.length ? ` (${order.length})` : ''}`],
+              ['story', 'Our Story'],
+              ['brand', 'Brand'],
+              ['contact', 'Contact'],
+            ].map(([tab, label]) => (
+              <button
+                key={tab}
+                id={`tab-${tab}`}
+                type="button"
+                role="tab"
+                aria-selected={activeTab === tab}
+                aria-controls={`${tab}-panel`}
+                className="tab-button"
+                tabIndex={activeTab === tab ? 0 : -1}
+                onClick={() => selectTab(tab)}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+          <div
+            className="tab-panel"
+            role="tabpanel"
+            id={`${activeTab}-panel`}
+            aria-labelledby={`tab-${activeTab}`}
+            tabIndex="0"
+          >
+        {activeTab === 'home' && (
+          <>
         <section className="hero-section container">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">
@@ -130,12 +193,12 @@ function App() {
               community together.
             </p>
             <div className="hero-actions">
-              <a href="#menu" className="primary-button large-button">
+              <button type="button" className="primary-button large-button" onClick={() => selectTab('menu')}>
                 Explore our menu
-              </a>
-              <a href="#contact" className="secondary-button large-button">
+              </button>
+              <button type="button" className="secondary-button large-button" onClick={() => selectTab('contact')}>
                 Contact us
-              </a>
+              </button>
             </div>
             <p className="hero-footnote">Menu, prices and launch details are being finalised.</p>
           </div>
@@ -163,9 +226,14 @@ function App() {
             <strong>We’re getting ready.</strong> Opening date and ordering details will
             be shared once confirmed.
           </p>
-          <a href="#contact">Stay in touch <span aria-hidden="true">↗</span></a>
+          <button type="button" onClick={() => selectTab('contact')}>
+            Stay in touch <span aria-hidden="true">↗</span>
+          </button>
         </div>
+          </>
+        )}
 
+        {activeTab === 'menu' && (
         <section id="menu" className="menu-section section-pad">
           <div className="container">
             <div className="section-heading menu-heading">
@@ -214,7 +282,9 @@ function App() {
             </div>
           </div>
         </section>
+        )}
 
+        {activeTab === 'order' && (
         <section className="order-section section-pad" id="order">
           <div className="container">
             <div className="section-heading">
@@ -290,7 +360,10 @@ function App() {
             </div>
           </div>
         </section>
+        )}
 
+        {activeTab === 'story' && (
+          <>
         <section id="story" className="story-section section-pad">
           <div className="container story-layout">
             <div className="story-art" aria-hidden="true">
@@ -335,7 +408,10 @@ function App() {
             </div>
           </div>
         </section>
+          </>
+        )}
 
+        {activeTab === 'brand' && (
         <section id="brand" className="brand-vision-section section-pad">
           <div className="container">
             <div className="section-heading brand-vision-heading">
@@ -370,7 +446,9 @@ function App() {
             </details>
           </div>
         </section>
+        )}
 
+        {activeTab === 'contact' && (
         <section id="contact" className="contact-section section-pad">
           <div className="container">
             <div className="section-heading contact-heading">
@@ -444,26 +522,25 @@ function App() {
             )}
           </div>
         </section>
+        )}
+          </div>
+        </div>
       </main>
 
       <footer className="site-footer">
         <div className="container footer-inner">
-          <a href="#home" className="footer-brand">
+          <button type="button" className="footer-brand" onClick={() => selectTab('home')}>
             <img src={brandLogo} alt="" />
             <span><strong>{business.name}</strong><small>{business.restaurantName}</small></span>
-          </a>
+          </button>
           <p>{business.tagline}</p>
-          <a href="#home" className="back-to-top">Back to top ↑</a>
+          <button type="button" className="back-to-top" onClick={() => selectTab('home')}>Home ↑</button>
         </div>
         <div className="container footer-bottom">
           <span>© {business.name}</span>
           <span>{business.location} · {business.status}</span>
         </div>
       </footer>
-      <a className="scroll-top" href="#home" aria-label="Back to top">
-        <span aria-hidden="true">↑</span>
-        <span>Top</span>
-      </a>
     </div>
   )
 }
