@@ -1,6 +1,6 @@
 # Ko Bazalwaneng / KBZ Springbok Grill
 
-A responsive, single-page introduction to KBZ Springbok Grill, a takeaway-first springbok grill in development for Mamelodi, Pretoria. The site clearly marks the business as opening soon and treats the menu as a preview until the owner confirms items, portions, availability and prices.
+A responsive introduction to Ko Bazalwaneng (KBZ Springbok Grill), a takeaway in Mamelodi, Pretoria. The shop grills and roasts springbok and serves it with potato wedges and side salads. It is built on Christian community values, and it is opening soon. The menu is a preview until portions, availability and prices are confirmed. The site does not publish prices or supplier details.
 
 ## Project setup
 
@@ -30,7 +30,19 @@ The site uses an in-panel tab navigation so visitors can switch between Home, Me
 - `public/logo-mark.svg` and `public/logo-ko-bazlwaneng.svg` are interim vector assets.
 - `public/favicon.svg` is the browser icon.
 
-The storefront, interior, takeaway packaging and uniform images in `public/brand/` are owner-supplied concept visuals. The site labels them as visualisations; they do not represent completed premises, final packaging, or current staff. Replace them with approved final artwork and real photography when available.
+The storefront, interior, packaging and uniform images in `public/brand/` are concept visuals. They are not shown on the site. Do not use them as photos of the premises, the packaging or the team.
+
+## Food photos
+
+The pictures in `public/images/` are licensed stand-ins for grilled game, potato wedges and salad. They are not photos of this shop, this kitchen or this team. Credits and licences are in the comments at the top of `src/config.js` and in the site footer.
+
+Still needed before a full launch:
+
+- A real photo of the shop exterior at SS Mokoene Drive, Mahube.
+- A real photo of the interior.
+- A real photo of the team.
+- A real photo of the takeaway packaging.
+- Real photos of KBZ springbok, wedges and salads from this kitchen.
 
 ## Build
 
@@ -50,4 +62,6 @@ For a Blueprint deployment, connect the repository to Render and apply the `ko-b
 - Approved final menu, portion sizes, availability and prices.
 - Opening hours and launch date.
 - Ordering, collection and delivery arrangements.
-- Official social links, real food photography and approved final logo assets.
+- Official social links.
+- Real photos of the premises, the team, the packaging, and the food from this kitchen.
+- Approved final logo assets, if the current logo changes.
