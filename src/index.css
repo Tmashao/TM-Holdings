@@ -6,7 +6,7 @@
   --cream: #f7f2e8;
   --cream-light: #fcfaf5;
   --cream-dark: #eee7d9;
-  --burnt-orange: #b95b31;
+  --burnt-orange: #934019;
   --muted: #6b6259;
   --container-width: 1200px;
 
@@ -28,6 +28,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {

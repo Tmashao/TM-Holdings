@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import {
   brandConcepts,
@@ -37,6 +37,22 @@ const formatPrice = (amount) => {
 function App() {
   const [order, setOrder] = useState([])
   const [activeTab, setActiveTab] = useState('home')
+  const suburb = business.location.split(',')[0].trim()
+
+  useEffect(() => {
+    const active = document.getElementById(`tab-${activeTab}`)
+    const nav = active?.closest('.main-nav')
+    if (!active || !nav) return
+    const left = active.offsetLeft
+    const right = left + active.offsetWidth
+    const viewLeft = nav.scrollLeft
+    const viewRight = viewLeft + nav.clientWidth
+    if (left < viewLeft) {
+      nav.scrollTo({ left: Math.max(0, left - 8), behavior: 'auto' })
+    } else if (right > viewRight) {
+      nav.scrollTo({ left: right - nav.clientWidth + 8, behavior: 'auto' })
+    }
+  }, [activeTab])
 
   const selectTab = (tab) => {
     setActiveTab(tab)
@@ -141,10 +157,21 @@ function App() {
             </span>
           </button>
 
-          <a href="#contact" className="header-location" onClick={(event) => {
-            event.preventDefault()
-            selectTab('contact')
-          }}>{business.location}</a>
+          <a
+            href="#contact"
+            className="header-location"
+            aria-label={`${business.location}. ${business.status}`}
+            onClick={(event) => {
+              event.preventDefault()
+              selectTab('contact')
+            }}
+          >
+            <span className="header-location-full">{business.location}</span>
+            <span className="header-location-short">
+              <span>{suburb}</span>
+              <span>{business.status}</span>
+            </span>
+          </a>
         </div>
       </header>
 
@@ -200,7 +227,19 @@ function App() {
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">
               <span className="status-dot" aria-hidden="true" />
-              {business.location} <span aria-hidden="true">/</span> {business.status}
+              <span className="status-full" aria-hidden="true">
+                <span className="status-place">{business.location}</span>
+                <span className="status-tail">
+                  <span className="status-sep" aria-hidden="true">/</span>
+                  <span className="status-state">{business.status}</span>
+                </span>
+              </span>
+              <span className="status-short" aria-hidden="true">
+                <span className="status-place">{suburb}</span>
+                <span className="status-sep" aria-hidden="true">·</span>
+                <span className="status-state">{business.status}</span>
+              </span>
+              <span className="visually-hidden">{business.location}. {business.status}</span>
             </p>
             <div className="hero-brand" aria-label={`${business.brand} ${business.restaurantName}`}>
               <img
@@ -500,7 +539,7 @@ function App() {
                 )}
                 {business.directions && (
                   <p className="contact-detail">
-                    <a href={business.directions} target="_blank" rel="noreferrer">
+                    <a className="contact-link" href={business.directions} target="_blank" rel="noreferrer">
                       Find this address on Google Maps
                     </a>
                   </p>
@@ -513,12 +552,12 @@ function App() {
                 <span className="contact-index">02 / SAY HELLO</span>
                 <h3>Talk to KBZ.</h3>
                 {business.telephoneNumber ? (
-                  <p><a href={`tel:${business.telephoneNumber}`}>{business.telephoneNumber}</a></p>
+                  <p><a className="contact-link" href={`tel:${business.telephoneNumber}`}>{business.telephoneNumber}</a></p>
                 ) : (
                   <p>Phone details to be confirmed.</p>
                 )}
                 {hasWhatsApp && (
-                  <p><a href={`https://wa.me/${whatsappNumber}`}>WhatsApp: {business.whatsappNumber}</a></p>
+                  <p><a className="contact-link" href={`https://wa.me/${whatsappNumber}`}>WhatsApp: {business.whatsappNumber}</a></p>
                 )}
                 <p className="contact-detail">
                   {business.operatingHours || 'Opening hours to be announced.'}
@@ -564,7 +603,10 @@ function App() {
           </div>
           <div className="container footer-bottom">
             <span>© {business.name}</span>
-            <span>{business.location} · {business.status}</span>
+            <span className="footer-meta">
+              <span>{business.location}</span>
+              <span className="footer-meta-status">{business.status}</span>
+            </span>
           </div>
         </footer>
       </div>
