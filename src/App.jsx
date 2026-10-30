@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react'
 import './App.css'
 import {
-  brandConcepts,
   brandLogo,
   business,
   communityPillars,
-  heroImage,
+  foodPhotos,
   menuItems,
   storyHighlights,
 } from './config'
@@ -129,6 +128,25 @@ function App() {
     window.open(url, '_blank', 'noopener,noreferrer')
   }
 
+  const pendingDetails = [
+    !business.telephoneNumber && 'our phone number',
+    !business.operatingHours && 'opening hours',
+    !business.launchDate && 'the opening date',
+    !(business.instagram || business.facebook) && 'our social pages',
+  ].filter(Boolean)
+
+  const pendingSentence = (() => {
+    if (pendingDetails.length === 0) return ''
+    const list =
+      pendingDetails.length === 1
+        ? pendingDetails[0]
+        : pendingDetails.length === 2
+          ? `${pendingDetails[0]} and ${pendingDetails[1]}`
+          : `${pendingDetails.slice(0, -1).join(', ')} and ${pendingDetails[pendingDetails.length - 1]}`
+    const sentence = `${list} will be shared when they are ready.`
+    return sentence.charAt(0).toUpperCase() + sentence.slice(1)
+  })()
+
   return (
     <div className="page-shell">
       <header className="topbar">
@@ -196,11 +214,12 @@ function App() {
           >
         {activeTab === 'home' && (
           <>
-        <section className="hero-section container">
+        <section className="hero-section panel-pad">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">
               <span className="status-dot" aria-hidden="true" />
-              {business.location} <span aria-hidden="true">/</span> {business.status}
+              <span>{business.location}</span>
+              <span className="eyebrow-status">{business.status}</span>
             </p>
             <div className="hero-brand" aria-label={`${business.brand} ${business.restaurantName}`}>
               <img
@@ -214,9 +233,9 @@ function App() {
             </div>
             <h1>{business.tagline}</h1>
             <p className="hero-text">
-              A new springbok grill is taking shape in {business.location.split(',')[0]}.
-              Follow our journey as we get ready to bring good food and a stronger
-              community together.
+              Ko Bazalwaneng is a takeaway in Mamelodi, Pretoria. We grill and roast
+              springbok, and we serve it with potato wedges and a side salad. We are
+              a Christian business. Good food and a stronger community belong together here.
             </p>
             <div className="hero-actions">
               <button type="button" className="primary-button large-button" onClick={() => selectTab('menu')}>
@@ -226,31 +245,55 @@ function App() {
                 Contact us
               </button>
             </div>
-            <p className="hero-footnote">Menu, prices and launch details are being finalised.</p>
+            <p className="hero-footnote">We are opening soon. The menu and prices are still being finished.</p>
           </div>
 
           <div className="hero-visual">
-            <img
-              src={heroImage}
-              alt="Visualisation of a Ko Bazalwaneng-branded springbok grill storefront, not current business premises"
-              fetchPriority="high"
-            />
-            <div className="image-stamp">
-              {business.campaignPhrase.split('. ').map((word) => (
-                <span key={word}>{word.replace('.', '')}.</span>
-              ))}
+            {/* LAUNCH PHOTO — PREMISES: this frame is a food stand-in, not the shop.
+                Add a real exterior photo of the premises at SS Mokoene Drive when one exists.
+                Do not use public/brand/storefront-concept.jpeg as that photo. */}
+            <div className="hero-photo">
+              <img
+                src={foodPhotos.platedGame.src}
+                width={foodPhotos.platedGame.width}
+                height={foodPhotos.platedGame.height}
+                alt={foodPhotos.platedGame.alt}
+                fetchPriority="high"
+              />
+              <div className="image-stamp">
+                {business.campaignPhrase.split('. ').map((word) => (
+                  <span key={word}>{word.replace('.', '')}.</span>
+                ))}
+              </div>
             </div>
-            <p className="photo-note">
-              Storefront concept visualisation only — not the current business premises.
-            </p>
+            <p className="photo-note">{foodPhotos.platedGame.caption}</p>
           </div>
+        </section>
+
+        <section className="facts-section panel-pad" aria-label="About Ko Bazalwaneng">
+          <article>
+            <h2>Who we are</h2>
+            <p>A takeaway in Mamelodi, Pretoria, getting ready to open.</p>
+          </article>
+          <article>
+            <h2>What we serve</h2>
+            <p>Grilled and roasted springbok, with potato wedges and side salads.</p>
+          </article>
+          <article>
+            <h2>What we stand for</h2>
+            <p>Christian community values: welcome people, and look after one another.</p>
+          </article>
+          <article>
+            <h2>When we open</h2>
+            <p>Opening soon. We will share the date when it is set.</p>
+          </article>
         </section>
 
         <div className="announcement-bar" role="status">
           <span className="announcement-mark" aria-hidden="true">KBZ</span>
           <p>
-            <strong>We’re getting ready.</strong> Opening date and ordering details will
-            be shared once confirmed.
+            <strong>We’re getting ready.</strong> We will share the opening date and how
+            to order when we know them.
           </p>
           <button type="button" onClick={() => selectTab('contact')}>
             Stay in touch <span aria-hidden="true">↗</span>
@@ -261,15 +304,15 @@ function App() {
 
         {activeTab === 'menu' && (
         <section id="menu" className="menu-section section-pad">
-          <div className="container">
+          <div className="panel-pad">
             <div className="section-heading menu-heading">
               <div>
                 <p className="eyebrow">A first look</p>
                 <h2>Made for the grill.<br />Made to bring people together.</h2>
               </div>
               <p className="section-intro">
-                We’re shaping a takeaway-first menu around springbok and satisfying
-                sides. These are ideas in development—not a confirmed menu.
+                Springbok from the grill and the oven, with potato wedges and side
+                salads. This is a first look while we finish the menu.
               </p>
             </div>
 
@@ -277,7 +320,7 @@ function App() {
               <span className="notice-icon" aria-hidden="true">i</span>
               <p>
                 <strong>Menu preview</strong>
-                <span>Items, portion sizes, availability and prices are subject to owner confirmation.</span>
+                <span>Portions, what we have each day, and prices are still being set.</span>
               </p>
             </div>
 
@@ -312,13 +355,13 @@ function App() {
 
         {activeTab === 'order' && (
         <section className="order-section section-pad" id="order">
-          <div className="container">
+          <div className="panel-pad">
             <div className="section-heading">
-              <p className="eyebrow">Takeaway enquiries</p>
-              <h2>Start a conversation.</h2>
+              <p className="eyebrow">Ask us</p>
+              <h2>Send us a note.</h2>
               <p className="section-intro">
-                Add ideas from the preview to your enquiry. When you’re ready, we’ll
-                open a WhatsApp message to the business number.
+                Pick something from the menu preview. When you are ready, WhatsApp
+                opens so you can message the shop.
               </p>
             </div>
 
@@ -326,7 +369,7 @@ function App() {
               <div className="order-panel">
                 <h3>Your enquiry</h3>
                 {order.length === 0 ? (
-                  <p className="empty-state">Your list is empty. Add an idea from the menu preview.</p>
+                  <p className="empty-state">Your list is empty. Add something from the menu.</p>
                 ) : (
                   <ul className="order-list" aria-live="polite">
                     {order.map((entry) => (
@@ -378,8 +421,7 @@ function App() {
                 </button>
                 {!hasWhatsApp && (
                   <p className="setup-note">
-                    WhatsApp will be available once the official business number is
-                    confirmed. No ordering endpoint has been added.
+                    WhatsApp will be ready here once the shop number is confirmed.
                   </p>
                 )}
               </aside>
@@ -391,19 +433,33 @@ function App() {
         {activeTab === 'story' && (
           <>
         <section id="story" className="story-section section-pad">
-          <div className="container story-layout">
-            <div className="story-art" aria-hidden="true">
-              <span className="story-art-kbz">KBZ</span>
-              <span className="story-art-rule" />
-              <span className="story-art-caption">Good food.<br />Stronger community.</span>
-            </div>
+          <div className="panel-pad story-layout">
+            <figure className="story-photo">
+              {/* LAUNCH PHOTO — TEAM: add a real photo of the KBZ team in this frame.
+                  The picture below is only a food stand-in. Do not use
+                  public/brand/uniform-concept.jpeg as the team. */}
+              <img
+                src={foodPhotos.roastedGame.src}
+                width={foodPhotos.roastedGame.width}
+                height={foodPhotos.roastedGame.height}
+                alt={foodPhotos.roastedGame.alt}
+                loading="lazy"
+              />
+              <figcaption>{foodPhotos.roastedGame.caption}</figcaption>
+            </figure>
             <div className="story-copy">
               <p className="eyebrow">Our story</p>
-              <h2>More than a meal.<br />A vision taking shape.</h2>
+              <h2>Good food for our neighbours.</h2>
               <p>
-                Ko Bazalwaneng is building towards more than a food business. KBZ
-                Springbok Grill begins with a simple ambition: serve food with care,
-                offer warm hospitality and create room for people to connect.
+                Ko Bazalwaneng is a takeaway in Mamelodi, Pretoria. We cook springbok
+                on the grill and in the oven, and we serve it with potato wedges and
+                a side salad.
+              </p>
+              <p>
+                We are a Christian business. We want people to feel welcome when they
+                collect their food. We hope the shop becomes a place where neighbours
+                meet, look out for one another, and grow together. We are still getting
+                ready. Those hopes will grow as the shop does.
               </p>
               <ul className="story-list">
                 {storyHighlights.map((point) => (
@@ -415,16 +471,17 @@ function App() {
         </section>
 
         <section id="community" className="community-section section-pad">
-          <div className="container community-layout">
+          <div className="panel-pad community-layout">
             <div>
-              <p className="eyebrow">Our intention</p>
+              <p className="eyebrow">What we care about</p>
               <h2>{business.campaignPhrase}</h2>
             </div>
             <div className="community-copy">
               <p>
-                We hope to grow into a welcoming place for fellowship, mentorship and
-                service. That community vision is part of our journey ahead—not a
-                programme already underway.
+                Our faith is part of this shop. We want to feed people well, welcome
+                them, and be a good neighbour in Mamelodi. We are not open yet. Time
+                together, and chances to help one another, will start once the takeaway
+                is up and running.
               </p>
               <div className="pillars" aria-label="Values guiding Ko Bazalwaneng">
                 {communityPillars.map((pillar) => (
@@ -439,113 +496,133 @@ function App() {
 
         {activeTab === 'brand' && (
         <section id="brand" className="brand-vision-section section-pad">
-          <div className="container">
+          <div className="panel-pad">
             <div className="section-heading brand-vision-heading">
-              <p className="eyebrow">The KBZ identity</p>
-              <h2>A bold mark. A warm welcome.</h2>
+              <p className="eyebrow">The KBZ look</p>
+              <h2>A springbok and a flame.</h2>
               <p className="section-intro">
-                Your springbok-and-flame logo leads a distinctive identity in dark
-                charcoal, warm gold and burnt orange. These supplied images show the
-                direction the brand could take across the space, packaging and team.
+                The springbok is the meat we cook. The flame is the fire we cook it on.
+                When you see them together, you have found Ko Bazalwaneng.
+              </p>
+              <p className="section-intro">
+                Our colours are dark charcoal, warm gold and burnt orange. They are the
+                colours of wood, fire and a good meal. You will see them on the sign,
+                the boxes and the clothes when the shop opens.
+              </p>
+              <p className="section-intro">
+                These photos show the food: grilled game, potato wedges and a fresh
+                salad. Pictures of our shop, our boxes and our team will be added when
+                we have real ones.
               </p>
             </div>
 
-            <details className="brand-concepts-disclosure">
-              <summary>View the brand concept gallery</summary>
-              <div className="concept-disclaimer">
-                These are concept visualisations, not photographs of completed premises,
-                final packaging, or current staff. Final brand assets and business details
-                are still to be confirmed.
-              </div>
-
-              <div className="brand-concept-grid">
-                {brandConcepts.map((concept) => (
-                  <article key={concept.id} className="brand-concept-card">
-                    <img src={concept.image} alt={concept.alt} loading="lazy" />
-                    <div className="brand-concept-caption">
-                      <span>{concept.label}</span>
-                      <h3>{concept.title}</h3>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </details>
+            {/* LAUNCH PHOTOS — PREMISES, PACKAGING, TEAM: add real photos of the shop,
+                the takeaway packaging and the team. These three pictures are food
+                stand-ins only. Do not publish public/brand/storefront-concept.jpeg,
+                interior-concept.jpeg, packaging-concept.jpeg or uniform-concept.jpeg
+                as if they are the real shop, boxes or staff. */}
+            <ul className="brand-photo-grid">
+              {[
+                ['From the fire', foodPhotos.platedGame, 'Grilled game, cooked over a fire.'],
+                ['Potato wedges', foodPhotos.wedges, 'Crisp potato wedges for the side.'],
+                ['Side salad', foodPhotos.salad, 'A fresh salad to eat with the meat.'],
+              ].map(([label, photo, caption]) => (
+                <li key={label}>
+                  <figure>
+                    <img
+                      src={photo.src}
+                      width={photo.width}
+                      height={photo.height}
+                      alt={photo.alt}
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <span>{label}</span>
+                      {caption}
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
         )}
 
         {activeTab === 'contact' && (
         <section id="contact" className="contact-section section-pad">
-          <div className="container">
+          <div className="panel-pad">
             <div className="section-heading contact-heading">
               <p className="eyebrow">Keep in touch</p>
-              <h2>KBZ is coming to {business.location.split(',')[0]}.</h2>
+              <h2>Come and find us.</h2>
               <p className="section-intro">
-                Send us a WhatsApp enquiry or find the address we’ve shared. Opening
-                hours and the launch date will be added once confirmed.
+                KBZ Springbok Grill is a takeaway in Mahube, Mamelodi. Message us on
+                WhatsApp while we get ready to open.
               </p>
             </div>
 
             <div className="contact-grid">
               <article className="contact-card">
                 <span className="contact-index">01 / FIND US</span>
-                <h3>Find us in {business.location.split(',')[0]}.</h3>
-                <p>{business.location}</p>
-                {business.address ? (
-                  <p className="contact-detail">{business.address}</p>
-                ) : (
-                  <p className="contact-detail">
-                    Exact address will be added once the operating location is confirmed.
-                  </p>
-                )}
+                <h3>Find us.</h3>
+                <p className="contact-address">
+                  {business.addressLines.map((line) => (
+                    <span key={line}>{line}</span>
+                  ))}
+                </p>
                 {business.directions && (
                   <p className="contact-detail">
                     <a href={business.directions} target="_blank" rel="noreferrer">
-                      Find this address on Google Maps
+                      Open in Google Maps
                     </a>
                   </p>
                 )}
-                <span className="contact-status">
-                  {business.address ? 'Location details' : 'Address to be confirmed'}
-                </span>
               </article>
               <article className="contact-card">
                 <span className="contact-index">02 / SAY HELLO</span>
                 <h3>Talk to KBZ.</h3>
-                {business.telephoneNumber ? (
-                  <p><a href={`tel:${business.telephoneNumber}`}>{business.telephoneNumber}</a></p>
-                ) : (
-                  <p>Phone details to be confirmed.</p>
+                {business.telephoneNumber && (
+                  <p className="contact-phone">
+                    <a href={`tel:${business.telephoneNumber}`}>{business.telephoneNumber}</a>
+                  </p>
                 )}
                 {hasWhatsApp && (
-                  <p><a href={`https://wa.me/${whatsappNumber}`}>WhatsApp: {business.whatsappNumber}</a></p>
+                  <p className="contact-phone">
+                    <a href={`https://wa.me/${whatsappNumber}`}>WhatsApp: {business.whatsappNumber}</a>
+                  </p>
                 )}
-                <p className="contact-detail">
-                  {business.operatingHours || 'Opening hours to be announced.'}
-                </p>
-                <p className="contact-detail">
-                  {business.launchDate
-                    ? `Launch: ${business.launchDate}`
-                    : 'Launch date to be announced.'}
-                </p>
-                <span className="contact-status">
-                  {business.telephoneNumber || hasWhatsApp ? 'Contact details' : 'Details coming soon'}
-                </span>
+                {business.operatingHours && <p>{business.operatingHours}</p>}
+                {business.launchDate && <p>Opening date: {business.launchDate}</p>}
+                {(business.instagram || business.facebook) && (
+                  <div className="social-links" aria-label="Social media">
+                    {business.instagram && (
+                      <a href={business.instagram} target="_blank" rel="noreferrer">Instagram</a>
+                    )}
+                    {business.facebook && (
+                      <a href={business.facebook} target="_blank" rel="noreferrer">Facebook</a>
+                    )}
+                  </div>
+                )}
+                {pendingSentence && <p className="contact-pending">{pendingSentence}</p>}
               </article>
             </div>
 
-            {(business.instagram || business.facebook) ? (
-              <div className="social-links" aria-label="Social media">
-                {business.instagram && (
-                  <a href={business.instagram} target="_blank" rel="noreferrer">Instagram</a>
-                )}
-                {business.facebook && (
-                  <a href={business.facebook} target="_blank" rel="noreferrer">Facebook</a>
-                )}
-              </div>
-            ) : (
-              <p className="social-placeholder">Official social pages to be confirmed.</p>
-            )}
+            <figure className="contact-photo">
+              {/* LAUNCH PHOTO — PREMISES: add a real photo of the shop at
+                  SS Mokoene Drive, Mahube, in this frame. The picture below is
+                  only a food stand-in. Do not use public/brand/storefront-concept.jpeg
+                  or public/brand/interior-concept.jpeg as the premises. */}
+              <img
+                src={foodPhotos.wedges.src}
+                width={foodPhotos.wedges.width}
+                height={foodPhotos.wedges.height}
+                alt={foodPhotos.wedges.alt}
+                loading="lazy"
+              />
+              <figcaption>
+                A photo of the shop on SS Mokoene Drive will go here. For now, these
+                are the potato wedges we plan to serve with the springbok.
+              </figcaption>
+            </figure>
           </div>
         </section>
         )}
@@ -565,6 +642,21 @@ function App() {
           <div className="container footer-bottom">
             <span>© {business.name}</span>
             <span>{business.location} · {business.status}</span>
+          </div>
+          <div className="container photo-credits">
+            <p>
+              Food photos are not our shop, our kitchen or our team. They were cropped
+              and made smaller so the page can load quickly.
+            </p>
+            <ul>
+              {Object.values(foodPhotos).map((photo) => (
+                <li key={photo.src}>
+                  <a href={photo.sourceUrl}>{photo.photographer}</a>
+                  {', '}
+                  <a href={photo.licenseUrl}>{photo.license}</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </footer>
       </div>

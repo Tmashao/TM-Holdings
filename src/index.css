@@ -7,8 +7,10 @@
   --cream-light: #fcfaf5;
   --cream-dark: #eee7d9;
   --burnt-orange: #b95b31;
+  --burnt-text: #8a3e1c;
   --muted: #6b6259;
-  --container-width: 1200px;
+  --body: #3a3028;
+  --container-width: 1520px;
 
   font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
   line-height: 1.5;
